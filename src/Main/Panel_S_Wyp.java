@@ -1,0 +1,330 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Main;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Pavel
+ */
+public class Panel_S_Wyp extends javax.swing.JPanel {
+    private Object DateFormatUtils;
+    public Panel ParentFrame;   
+    /**
+     * Creates new form Panel_S_Wyp
+     */
+    public Panel_S_Wyp() {
+        initComponents();
+        Baza();
+        Clear();
+    }
+    
+    public void Clear(){
+        LL_Klient.setText("");
+        LL_Mag.setText("");
+        LL_zostalo.setText("");
+    }
+    
+    public void Search(String ID) throws ParseException{
+        try{
+            Mysql sql = new Mysql();
+            int col = sql.Tabel_col("wypoczalnia");
+            String baza[] = new String[col];
+            baza = sql.Wyp_Search(ID);
+            String baza_k = new String();
+            String baza_m = new String();
+            baza_k = sql.Client_Search_Name(baza[1]);
+            baza_m = sql.Mag_Search_Name(baza[2]);
+            LL_Klient.setText(baza_k);
+            LL_Mag.setText(baza_m);
+            Date now_day = new Date();
+            String d_z = baza[4];
+            String d_w = baza[3];
+            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+            Date dz = ft.parse(d_z);
+            JD_w.setDate(ft.parse(d_w));
+            JD_z.setDate(ft.parse(d_z));
+            JD_w.setMinSelectableDate(ft.parse(d_w));
+            JD_z.setMinSelectableDate(ft.parse(d_z));
+            if (now_day.compareTo(dz) < 0){
+                int diff_day = calculateDifference(now_day, dz);
+                //System.out.println(diff_day);
+                LL_zostalo.setText(diff_day+" dni");
+            }else{
+                //System.out.println("przekroczył terminu");
+                LL_zostalo.setText("Przekroczył datę");
+            }
+            
+            //System.out.println("Wypozu: "+dw+" Zwrotu: "+dz);
+            //dw = DateFormatUtils.format(baza[3],"yyyy-MM-dd");
+            //dz = DateFormatUtils.format(baza[4],"yyyy-MM-dd");
+            
+            //System.out.println(ft.format(Now));
+
+        } catch(SQLException ex){
+            Logger.getLogger(Panel_S_Wyp.class.getName()).log(Level.SEVERE, null, ex);
+            Plik p = new Plik();
+            try {
+                p.zapisPliku(ex.toString());
+            } catch (IOException ex1) {
+                Logger.getLogger(Panel_E_Klient.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }
+    public static int calculateDifference(Date a, Date b){
+        int tempDifference = 0;
+        int difference = 0;
+        Calendar earlier = Calendar.getInstance();
+        Calendar later = Calendar.getInstance();
+        
+        if (a.compareTo(b) < 0){
+            earlier.setTime(a);
+            later.setTime(b);
+        }else{
+            earlier.setTime(b);
+            later.setTime(a);
+        }
+
+        while (earlier.get(Calendar.YEAR) != later.get(Calendar.YEAR)){
+            tempDifference = 365 * (later.get(Calendar.YEAR) - earlier.get(Calendar.YEAR));
+            difference += tempDifference;
+
+            earlier.add(Calendar.DAY_OF_YEAR, tempDifference);
+        }
+
+        if (earlier.get(Calendar.DAY_OF_YEAR) != later.get(Calendar.DAY_OF_YEAR)){
+            tempDifference = later.get(Calendar.DAY_OF_YEAR) - earlier.get(Calendar.DAY_OF_YEAR);
+            difference += tempDifference;
+
+            earlier.add(Calendar.DAY_OF_YEAR, tempDifference);
+        }
+
+        return difference;
+    }
+    
+    
+    public void Baza(){
+        try {
+            Mysql sql = new Mysql();
+            int row = sql.Tabel_row("wypoczalnia");
+            int col = sql.Tabel_col("wypoczalnia");
+            String baza[][] = new String[row][4];
+            baza = sql.Wyp_Stan_ID();
+            String value[] = new String[row];
+            for(int i=0;i<row;i++){
+                value[i] = "ID:"+ baza[i][0]+" "+  sql.Client_Search_Name(baza[i][1])+ " - " + sql.Mag_Search_Name(baza[i][2])+" do zwrotu: "+baza[i][3];               
+            }
+            L_wyp.setListData(value);
+        } catch (SQLException ex) {
+            Logger.getLogger(Panel_S_Wyp.class.getName()).log(Level.SEVERE, null, ex);
+            Plik p = new Plik();
+            try {
+                p.zapisPliku(ex.toString());
+            } catch (IOException ex1) {
+                Logger.getLogger(Panel_E_Klient.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        L_wyp = new javax.swing.JList();
+        L_Klient = new javax.swing.JLabel();
+        L_Mag = new javax.swing.JLabel();
+        LL_Klient = new javax.swing.JLabel();
+        LL_Mag = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        JD_w = new com.toedter.calendar.JDateChooser();
+        JD_z = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        LL_zostalo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        L_wyp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                L_wypMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(L_wyp);
+
+        L_Klient.setText("Klient:");
+
+        L_Mag.setText("Magazyn:");
+
+        LL_Klient.setText("jLabel3");
+
+        LL_Mag.setText("jLabel4");
+
+        jLabel1.setText("Data wypoży:");
+
+        jLabel2.setText("Data zwrotu:");
+
+        jLabel3.setText("Zostało dni:");
+
+        LL_zostalo.setText("jLabel4");
+
+        jButton1.setText("Edit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Zwrot");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(L_Klient)
+                                .addGap(18, 18, 18)
+                                .addComponent(LL_Klient))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(L_Mag)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LL_Mag))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JD_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JD_w, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LL_zostalo)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(L_Klient)
+                    .addComponent(LL_Klient))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(L_Mag)
+                    .addComponent(LL_Mag))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(JD_w, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(JD_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(LL_zostalo))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void L_wypMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_L_wypMouseClicked
+        int index = L_wyp.getSelectedIndex();
+        String name = (String)L_wyp.getSelectedValue();
+        if(index != -1){
+            try {
+                Short_ID SID = new Short_ID();
+                Search(SID.ID_W(name));
+            } catch (ParseException ex) {
+                Logger.getLogger(Panel_S_Wyp.class.getName()).log(Level.SEVERE, null, ex);
+                Plik p = new Plik();
+            try {
+                p.zapisPliku(ex.toString());
+            } catch (IOException ex1) {
+                Logger.getLogger(Panel_E_Klient.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            }
+        }
+    }//GEN-LAST:event_L_wypMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int index = L_wyp.getSelectedIndex();
+        if(index != -1){
+            String value = (String) L_wyp.getSelectedValue();
+            Short_ID SID  = new Short_ID();
+            ParentFrame.Opened_Z_Wyp(SID.ID_W(value));
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int index = L_wyp.getSelectedIndex();
+        if(index != -1){
+            String value = (String) L_wyp.getSelectedValue();
+            Short_ID SID = new Short_ID();
+            ParentFrame.Opened_E_Wyp(SID.ID_W(value));
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser JD_w;
+    private com.toedter.calendar.JDateChooser JD_z;
+    private javax.swing.JLabel LL_Klient;
+    private javax.swing.JLabel LL_Mag;
+    private javax.swing.JLabel LL_zostalo;
+    private javax.swing.JLabel L_Klient;
+    private javax.swing.JLabel L_Mag;
+    private javax.swing.JList L_wyp;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+
+    
+}

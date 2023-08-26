@@ -1,0 +1,68 @@
+10000001 1 Romex Rower Miejskie Damskie EXG83454 -rozmiar koła: 26"
+-bagażnik przedni i tylny 
+20 
+ 
+10000002 1 Cross Rower Górskie Voltage ER-234 -Profesjonalny Amoryzator
+-Koła 26"  
+120 
+ 
+10000005 1 KTM Rower Górskie Ultra 1964 LTD 27 2004 - amortyzatory
+- bieg 3x8
+- koła 27"
+- wszystkie element są Shimano 
+75 
+ 
+10000006 1 KTM Rower Górskie Lycan 2013 - rama aluminiowa
+- koła 26"
+- biegi 3x7
+- jest amortyzator tylny
+  
+100 
+ 
+10000007 1 Scott Rowe Górskie Aspect 20 2012 - rama stalowa
+- koła 26"
+- hamulec hydrauliczna dwu tarczowa przedni
+- hamulec hydrauliczna jedno tarczowa tylny
+ 
+150 
+ 
+10000008 1 Scott Rower Crossowe Sportster 60 2012 - rama aluminiowa
+- koła 30"
+- jest koszyk na bindol  
+130 
+ 
+10000009 1 Romet Rower Składane Wigry 3 2012 - koła 20"
+- bieg 3
+- są błotnik i bagażnik tylny, oświetlenia
+ 
+30 
+ 
+10000010 1 Dahon Rower Składane BoardWalk D8 2013 - Bieg 8
+- Koła 20"
+- Dopasowany wzrost 142-193 cm
+- brak bagażnik i oświetlenia 
+25 
+ 
+10000003 2 Blizzard Narty zjazdowe ER-13E334 -dla zaawansowany
+-wys 170 cm 
+100 
+ 
+10000004 2 Volki Narty biegowe Progressor 80043 -dla średnich
+-wys 140 cm 
+60 
+ 
+10000011 2 Fischer Narty zjazdowe Progressor 800 2014 - wys. 165 cm
+- najnowszy model
+- ulepszenia jazda
+- ostry zakrętu
+- dla męskie 
+180 
+ 
+10000012 2 Head Narty zjazdowe Supershape Magnum 2014 - ulepszeni alpejskiego narciarstwa
+- wys. 149 cm 
+180 
+ 
+10000013 16 Solex Rolki Rekreacyjne Ribon -rozmiar 42
+-kolor czarny 
+40 
+ 

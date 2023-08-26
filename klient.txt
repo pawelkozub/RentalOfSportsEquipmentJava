@@ -1,0 +1,14 @@
+null10009 Szymon Gastoł Sułuszowa 23 33-233 Sułuszowa 
+10014 Michał Kołodziej Słowackiego 13 33-132 Kraków 
+10010 Mateusz Konopka Sienkiewicza 123 24-123 Wieliczka 
+10013 Paweł Kozioł Żwirki i Wigury 234 42-244 Wrocław 
+10004 Monika Koziołek Wielopole 345 23-455 Myślenice 
+10001 Paweł Kozub Reymonta 17/220B 30-059 Kraków 
+10008 Mateusz Mucha Mickiewicza 12 12-132 Skawina 
+10002 Jan Nowak Mickiewicza 30 30-123 Kraków 
+10011 Paweł Panek WIśniowa 23 23-234 Przeworsk 
+10006 Karol Stoch Cisowa 1 33-231 Chrzanów 
+10005 Magda Woskowicz os. Sportowe 12/2 23-222 Kraków 
+10007 Piotr Woskowicz Spokojna 23 42-432 Kraków 
+10003 Monika Wójcikł Spokojna 12 33-533 Nowy Sącz 
+10012 Małgorzata Zalewska Majowa 13 32-132 Słomniki 
